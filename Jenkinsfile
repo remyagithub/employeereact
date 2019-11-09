@@ -1,5 +1,12 @@
-node {
-    def app
+pipeline {
+
+  agent {
+    docker {
+        args '-u root -v /var/run/docker.sock:/var/run/docker.sock'
+    }
+  }
+
+   stages{
 
     stage('Clone repository') {
         /* Let's make sure we have the repository cloned to our workspace */
@@ -34,4 +41,5 @@ node {
           sh 'echo "Trying to push Docker Build to Docker Hub"' 
 
     }
+}
 }
